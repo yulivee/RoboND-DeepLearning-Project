@@ -2,6 +2,7 @@
 data/train/
 data/validation/
 data/evaluation/
+runs/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
