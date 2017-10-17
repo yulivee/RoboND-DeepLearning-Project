@@ -10,7 +10,7 @@ In Project Follow-me, a Quadcopter with a camera should be able to follow a spec
 
 Question numer one qualifies a **Convolutional Neural Network** (Covnet or CNN) to be used. The advantage of covnets is, that the numbers of networkparameters can be drastically reduced by using knowledge about the structure of the data. As we are dealing with images for the task at hand, we know that it is not important to know in which corner of the image our hero is, to know the he is the hero. The weights are shared across all patches in an input layer.
 
-Question number two makes it necessary to use a **Fully Convolutional Network** (FCN) , as this type of network preserves the spatial information in an image and enables us to get an understanding of the scene through semantic segmantation. In this type of Neural Network, the high-level reasoning layer is composed of *1x1 convolutional layers* instead of a *fully connected layers*. This neat trick presevers the location information.
+Question number two makes it necessary to use a **Fully Convolutional Network** (FCN) , as this type of network preserves the spatial information in an image and enables us to get an understanding of the scene through semantic segmantation. In this type of Neural Network, the high-level reasoning layer is composed of *1x1 convolutional layers* instead of *fully connected layers*. This neat trick presevers the location information.
 
 A typical FCN is composited of multiple **encoder** blocks, followed by 1x1 convolutional layers, followed by as many **decoder** blocks as there are encoder blocks. The encoder blocks extract features for the image, the decoder blocks upscale the output back to the size of the original image. The result is a segmentation information for every pixel in the image. So called skip connections enable the network to use images from multiple resolution scales by connecting non-adjacent layers. This results in more precise semantic segmentation in the output image.
 
@@ -60,8 +60,20 @@ I settled with 40 validation steps ( which is the number of validation images/ b
 
 I started with the default parameters in the jupyter notebook and started with 31% score. As I had trouble acquiring GPU Instances on Amazon and my computer proved to be quite slow with the learning process, I put the code from the notebook into a python script which I feed a json file with the various parameter configurations I wanted to try. This way, my computer could keep performing hyperparameter tuning while I could sleep or go to work. See training.py and training\_parameters.json. The script is called like this `sudo nice -n 19 ./training.py | tee training_output.log` (the nice is to up the priority of the script on linux).
 
-The tuning was a kind of educated brute-force. I started with the default parameters and kept adjusting the learning rate. I then tried various epochs and started varying the steps per epoch. My best score to date is 41,5% score.
+The tuning was a kind of educated brute-force. I started with the default parameters and kept adjusting the learning rate. I then tried various epochs and started varying the steps per epoch. My best score to date is 41,5% score using only the provided training images.
 
 ## Neural Network Layers
 
-## Image Manipulation
+### 1x1 Convolutional Layers
+A 1x1 convolutional layer is a mini-neural network of 1 pixel width and height. It is typically used between other convolution layers to increase the depth and number of parameters of a model without changing the structure of it. In the FCN used in the project, a convolutional layer is used between the encoder and decoder blocks instead of a fully connected layer to create maximum depth while preserving spatial information.
+
+
+### Fully connected layers
+
+In a fully connected layer all neurons have full connections to all activation functions from the previous layer. This is the common layer type in regular neural networks (as opposed to covnets). Their activations can be calculated with a matrix multiplication and an added bias. While this works great in calculating probabilities and answering yes-no questions, this does not work well with images of varying sizes: the size of the input is constrained by the size of the fully connected layer.
+
+## Limitations
+
+In Theory, this model could work for following another object ( dog, cat, car etc.). The Convolutional layers are choosing and extracting features from the images on their own, so as long as there is a reasonably large set of training-data it could be trained to follow something else. It would probably need a bit of hyperparameter tuning. The limitiation I image is, that cars can be pretty indistiguishable - two yellow sedan taxis look pretty much the same apart from the license plate. So I imagine that it could be problematic to follow the correct car if there appear two cars of the same model. Adding additional layers could help identify more features but I guess it would be hard to fully eliminate that problem.
+
+In a sense, the simulation was cheating a bit as well, because the hero was wearing a red shirt that no one else was wearing. But in real life, it is rare to find two people wearing exactly the same, having the same skintone, haircolor, height and body shape. There is more diversity in people than in cars, so the probability of collisions should be pretty small.
