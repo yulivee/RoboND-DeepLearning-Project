@@ -15,7 +15,7 @@ Question number two makes it necessary to use a **Fully Convolutional Network** 
 A typical FCN is composited of multiple **encoder** blocks, followed by 1x1 convolutional layers, followed by as many **decoder** blocks as there are encoder blocks. The encoder blocks extract features for the image, the decoder blocks upscale the output back to the size of the original image. The result is a segmentation information for every pixel in the image. So called skip connections enable the network to use images from multiple resolution scales by connecting non-adjacent layers. This results in more precise semantic segmentation in the output image.
 
 My final network layout looks like this:
-![nwarch]ttps://github.com/yulivee/RoboND-DeepLearning-Project/raw/master/docs/network-drawing.png "Network Architecture")
+![nwarch](https://github.com/yulivee/RoboND-DeepLearning-Project/raw/master/docs/network-drawing.png "Network Architecture")
 
 I decided to go with 3 layers for encoder and decoder, as I wanted to use few layers. Networks with many layers are more prone to overfitting. After researching google for best practices in filter size and comming to the conclusion that it seemed common to gradually increase them, I decided to go with multiples of 8.
 
