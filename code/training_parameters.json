@@ -1,0 +1,66 @@
+{
+    "001" : {
+        "learning_rate" : "0.005",
+        "batch_size" : "30",
+        "num_epochs" : "15",
+        "steps_per_epoch" : "50",
+        "validation_steps" : "40",
+        "workers" : 4
+    },
+    "002" : {
+        "learning_rate" : "0.002",
+        "batch_size" : "30",
+        "num_epochs" : "15",
+        "steps_per_epoch" : "50",
+        "validation_steps" : "40",
+        "workers" : 4
+    },
+    "003" : {
+        "learning_rate" : "0.01",
+        "batch_size" : "30",
+        "num_epochs" : "15",
+        "steps_per_epoch" : "50",
+        "validation_steps" : "40",
+        "workers" : 4
+    },
+    "004" : {
+        "learning_rate" : "0.008",
+        "batch_size" : "30",
+        "num_epochs" : "25",
+        "steps_per_epoch" : "138",
+        "validation_steps" : "40",
+        "workers" : 4
+    },
+    "005" : {
+        "learning_rate" : "0.008",
+        "batch_size" : "30",
+        "num_epochs" : "40",
+        "steps_per_epoch" : "138",
+        "validation_steps" : "40",
+        "workers" : 4
+    },
+    "006" : {
+        "learning_rate" : "0.008",
+        "batch_size" : "30",
+        "num_epochs" : "40",
+        "steps_per_epoch" : "100",
+        "validation_steps" : "40",
+        "workers" : 4
+    },
+    "007" : {
+        "learning_rate" : "0.008",
+        "batch_size" : "30",
+        "num_epochs" : "40",
+        "steps_per_epoch" : "100",
+        "validation_steps" : "100",
+        "workers" : 4
+    },
+    "008" : {
+        "learning_rate" : "0.008",
+        "batch_size" : "40",
+        "num_epochs" : "40",
+        "steps_per_epoch" : "100",
+        "validation_steps" : "100",
+        "workers" : 4
+    }
+}
