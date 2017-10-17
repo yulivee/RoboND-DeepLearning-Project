@@ -17,9 +17,50 @@ A typical FCN is composited of multiple **encoder** blocks, followed by 1x1 conv
 My final network layout looks like this:
 ![nwarch](https://github.com/yulivee/RoboND-DeepLearning-Project/raw/master/docs/network-drawing.png "Network Architecture")
 
-I decided to go with 3 layers for encoder and decoder, as I wanted to use few layers. Networks with many layers are more prone to overfitting. After researching google for best practices in filter size and comming to the conclusion that it seemed common to gradually increase them, I decided to go with multiples of 8.
+I decided to go with 3 layers for encoder and decoder, as I wanted to use few layers. Networks with many layers are more prone to overfitting. After researching google for best practices in filter size and comming to the conclusion that it seemed common to gradually increase them, I decided to go with multiples of 8. My first attempt with some initial hyperparameters already went straigth for 31% final score, so I decided to stick with the architecture.
 
 ## Neural Network Parameters
+
+The Hyperparameters of this FCN are:
+
+- Learning Rate
+- Batch Size
+- Epochs
+- Steps per Epoch
+- Validation Steps
+
+I will explain my approach of tuning the parameters after the introduction of the inidividual parameters.
+
+### Learning Rate
+The learning rate is the amount of correction which the network applies when modifing the weights. Its an indicator how quickly the network can change its mind. This is usually a low value - I experimented with values between 0,01 and 0,002. Otherwise to much instability is introduced into the network.
+
+I settled with a learning rate of 0,008
+
+### Batch Size
+As memory is a finite source, not all training input can be put into the network in one run. Therefore the input is divided into subsets called batches. The input is randomly shuffled an then put into the batches.
+
+I settled with a batch size of 30
+
+### Epochs
+An epoch is a full walkthrough of a neural network, that means performing a full forward- and backward-propagation. Performing this multiple times increases the network accuracy without the need for more testing data. This advantage will cease over time, there comes a point when the accuracy stops increasing. It is connected to the learning rate: smaller learning rates need more epochs to get a good accuracy. This makes sense as the changes are more subtle and therefore need more time to develop.
+
+The sweet-spot for epochs was 50
+
+### Steps per Epoch
+The steps per epoch is the number of training image batches which pass the network in 1 epoch. There is no need to put every image through the network in every epoch and not putting everything in everytime also helps with overfitting.
+
+I settled with 138 steps per epoch ( which is the number of training images/ batch size )
+
+### Validation Steps
+The steps per epoch is the number of validation image batches which pass the network in 1 epoch. This is the same as steps per epoch with validation images.
+
+I settled with 40 validation steps ( which is the number of validation images/ batch size )
+
+### Hyperparameter Tuning Approach
+
+I started with the default parameters in the jupyter notebook and started with 31% score. As I had trouble acquiring GPU Instances on Amazon and my computer proved to be quite slow with the learning process, I put the code from the notebook into a python script which I feed a json file with the various parameter configurations I wanted to try. This way, my computer could keep performing hyperparameter tuning while I could sleep or go to work. See training.py and training\_parameters.json. The script is called like this `sudo nice -n 19 ./training.py | tee training_output.log` (the nice is to up the priority of the script on linux).
+
+The tuning was a kind of educated brute-force. I started with the default parameters and kept adjusting the learning rate. I then tried various epochs and started varying the steps per epoch. My best score to date is 41,5% score.
 
 ## Neural Network Layers
 
