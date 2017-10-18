@@ -112,7 +112,7 @@ for run, run_number in input_args.items():
     num_epochs = int(run_number['num_epochs'])
     print("Epochs: "+str(num_epochs))
     steps_per_epoch = int(run_number['steps_per_epoch'])
-    print("Steps per Epoch:"+str(steps_per_epoch))
+    print("Steps per Epoch: "+str(steps_per_epoch))
     validation_steps = int(run_number['validation_steps'])
     print("Validation Steps: "+str(validation_steps))
     workers = int(run_number['workers'])
@@ -160,27 +160,50 @@ for run, run_number in input_args.items():
     val_following, pred_following = model_tools.write_predictions_grade_set(model,
                                             run_num,'following_images', 'evaluation')
     
-    print("Scores for while the quad is following behind the target")                                    
+    print("--------------------------------------------------------------------------------")
+    print( "Scores for while the quad is following behind the target" )                                    
     true_pos1, false_pos1, false_neg1, iou1 = scoring_utils.score_run_iou(val_following, pred_following)
+    print( "true_pos1: "  + str(true_pos1)  )
+    print( "false_pos1: " + str(false_pos1) )
+    print( "false_neg1: " + str(false_neg1) )
+    print( "iou1: "       + str(iou1)       )
     
-    print("Scores for while the quad is on patrol and the target is not visable")                                    
+    print("--------------------------------------------------------------------------------")
+    print( "Scores for while the quad is on patrol and the target is not visable" )                                    
     true_pos2, false_pos2, false_neg2, iou2 = scoring_utils.score_run_iou(val_no_targ, pred_no_targ)
+    print( "true_pos2: "  + str(true_pos2)  )
+    print( "false_pos2: " + str(false_pos2) )
+    print( "false_neg2: " + str(false_neg2) )
+    print( "iou2: "       + str(iou2)       )
     
-    print("This score measures how well the neural network can detect the target from far away")
+    print("--------------------------------------------------------------------------------")
+    print( "This score measures how well the neural network can detect the target from far away" )
     true_pos3, false_pos3, false_neg3, iou3 = scoring_utils.score_run_iou(val_with_targ, pred_with_targ)
+    print( "true_pos3: "  + str(true_pos3)  )
+    print( "false_pos3: " + str(false_pos3) )
+    print( "false_neg3: " + str(false_neg3) )
+    print( "iou3: "       + str(iou3)       )
     
+    print("--------------------------------------------------------------------------------")
+    print( "Summation of Scores" )
     true_pos = true_pos1 + true_pos2 + true_pos3
     false_pos = false_pos1 + false_pos2 + false_pos3
     false_neg = false_neg1 + false_neg2 + false_neg3
+    print( "true_pos: "  + str(true_pos)  )
+    print( "false_pos: " + str(false_pos) )
+    print( "false_neg: " + str(false_neg) )
     
-    print("Sum all the true positives, etc from the three datasets to get a weight for the score")
+    print("--------------------------------------------------------------------------------")
+    print( "Sum all the true positives, etc from the three datasets to get a weight for the score" )
     weight = true_pos/(true_pos+false_neg+false_pos)
-    print("Weight: "+weight)
+    print( "Weight: "+ str(weight) )
     
-    print("The IoU for the dataset that never includes the hero is excluded from grading")
+    print("--------------------------------------------------------------------------------")
+    print( "The IoU for the dataset that never includes the hero is excluded from grading" )
     final_IoU = (iou1 + iou3)/2
-    print("Final IoU: "+final_IoU)
+    print( "Final IoU: "+ str(final_IoU) )
     
-    print("Final Grade Score")
+    print("--------------------------------------------------------------------------------")
+    print( "Final Grade Score" )
     final_score = final_IoU * weight
-    print("Grade: "+final_score)
+    print( "Grade: "+ str(final_score) )
