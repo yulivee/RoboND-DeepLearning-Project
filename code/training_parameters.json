@@ -1,40 +1,32 @@
 {
-    "011" : {
+    "211" : {
         "learning_rate" : "0.008",
         "batch_size" : "30",
-        "num_epochs" : "50",
+        "num_epochs" : "10",
         "steps_per_epoch" : "138",
         "validation_steps" : "40",
         "workers" : 4
     },
-    "012" : {
-        "learning_rate" : "0.008",
-        "batch_size" : "40",
-        "num_epochs" : "50",
-        "steps_per_epoch" : "138",
-        "validation_steps" : "40",
-        "workers" : 4
-    },
-    "013" : {
-        "learning_rate" : "0.008",
-        "batch_size" : "20",
-        "num_epochs" : "50",
-        "steps_per_epoch" : "138",
-        "validation_steps" : "40",
-        "workers" : 4
-    },
-    "014" : {
+    "212" : {
         "learning_rate" : "0.008",
         "batch_size" : "30",
-        "num_epochs" : "50",
+        "num_epochs" : "15",
+        "steps_per_epoch" : "138",
+        "validation_steps" : "40",
+        "workers" : 4
+    },
+    "214" : {
+        "learning_rate" : "0.008",
+        "batch_size" : "30",
+        "num_epochs" : "20",
         "steps_per_epoch" : "138",
         "validation_steps" : "35",
         "workers" : 4
     },
-    "015" : {
+    "215" : {
         "learning_rate" : "0.008",
         "batch_size" : "32",
-        "num_epochs" : "50",
+        "num_epochs" : "30",
         "steps_per_epoch" : "138",
         "validation_steps" : "37",
         "workers" : 4
