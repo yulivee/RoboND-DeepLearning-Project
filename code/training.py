@@ -60,7 +60,7 @@ def decoder_block(small_ip_layer, large_ip_layer, filters):
 
 def fcn_model(inputs, num_classes):
     
-    filters = 8
+    filters = 36
     strides = 2
     #Input size: 
     
@@ -122,7 +122,7 @@ for run, run_number in input_args.items():
     # Define the Keras model and compile it for training
     model = models.Model(inputs=inputs, outputs=output_layer)
     
-    model.compile(optimizer=keras.optimizers.Adam(learning_rate), loss='categorical_crossentropy')
+    model.compile(optimizer=keras.optimizers.Nadam(learning_rate), loss='categorical_crossentropy')
     
     # Data iterators for loading the training and validation data
     train_iter = data_iterator.BatchIteratorSimple(batch_size=batch_size,
