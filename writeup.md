@@ -2,9 +2,10 @@
 
 Welcome to the writeup of my attempt at the Follow-me Project! I am excited to share my findings with you!
 My repository contains lots of weight collections, Please refer to the following files for my submission:
-    - `/data/weighths/config_model_weights_225`
-    - `/data/weighths/model_weights_225.h5`
-    - `model_training.html`
+
+- `/data/weighths/config_model_weights_225`
+- `/data/weighths/model_weights_225.h5`
+- `model_training.html`
     
 
 ## Neural Network Architecture
@@ -29,6 +30,10 @@ During the testing I noticed that I got stuck around ~38% testing, even varying 
 The best I could get was 0.398499510675, just below the magic mark...
 
 So as a further attempt, I printed out the number of parameters with `model.summary` and got around 12,000 parameters with the provided testing data. I guess that this could be a too small number for properly recognizing features and decided to add an additional separable convolution layer to my decoder block function. Additionally I decided to make my model deeper to get more parameters and went for multiples of 36. This brough me to 250.000 parameters which sounded enough. Following the discussions on slack, I read up on Nesterov Momentum at cs231n.github.io/neural-networks-3/#baby and decided to give it a try. The result was a whopping 44 Grade, so ~6% better.
+
+My final layout of my encoder and decoder blocks look like this:
+![nwblocks](https://github.com/yulivee/RoboND-DeepLearning-Project/raw/master/docs/network-blocks.png "Network Block Structure")
+
 
 ## Neural Network Parameters
 
